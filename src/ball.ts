@@ -40,16 +40,13 @@ export class Ball {
     return this.x < this.radius
   }
 
-
   reset () {
     this.x = this.canvasWidth / 2
 		this.y = this.canvasHeight / 2
-		
 		this.xSpeed = this.randomBetween(3, 4)
 		
-		let isLeft = this.randomBetween(0, 1) > 0.5
-		
-    if (isLeft) {
+		let shouldGoLeft = this.randomBetween(0, 1) > 0.5
+    if (shouldGoLeft) {
 			this.xSpeed = -this.xSpeed;
 		} 
 		
@@ -59,7 +56,6 @@ export class Ball {
   randomBetween (min: number, max: number) {
     return Math.random() * (max - min) + min;
   }
-
 
   changeDirection () {
     this.xSpeed = -this.xSpeed

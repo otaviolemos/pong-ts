@@ -9,8 +9,8 @@ export class Paddle {
   readonly width: number = 20
   readonly canvasHeight: number
   readonly canvasWidth: number
-  isDown = false
-  isUp = false
+  shouldGoDown = false
+  shouldGoUp = false
   
   constructor (x: number, y: number, canvasHeight: number, canvasWidth: number) {
     this.x = x
@@ -20,20 +20,20 @@ export class Paddle {
   }
 
   update () {
-    if (this.isUp) {
-      this.up()
-    } else if (this.isDown) {
-      this.down()
+    if (this.shouldGoUp) {
+      this.goUp()
+    } else if (this.shouldGoDown) {
+      this.goDown()
     }
   }
 
-  up () {
+  goUp () {
     if (this.y > 0) {
       this.y -= 2
     }
   }
 
-  down () {
+  goDown () {
     if (this.y < this.canvasHeight - this.height) {
       this.y += 2
     }
@@ -74,13 +74,12 @@ export class Paddle {
 
   processArtificialMovement (ballHeight: number) {
     let middleOfPaddle = this.y + this.height / 2;
-    
     if (middleOfPaddle > ballHeight) {
-      this.isUp = true;
-      this.isDown = false;
+      this.shouldGoUp = true;
+      this.shouldGoDown = false;
     } else {
-      this.isDown = true;
-      this.isUp = false;
+      this.shouldGoDown = true;
+      this.shouldGoUp = false;
     }
   }
 }

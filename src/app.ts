@@ -19,47 +19,61 @@ const sketch = (p5: P5) => {
 	}
 
 	p5.draw = () => {
+		clearScreen()
+		displayObjects()
+		updateObjects()
+		handleCollision()		
+		displayLine()
+		displayScores()
+	}
+
+	p5.keyPressed = () => {
+		if (p5.keyCode === p5.UP_ARROW) {
+			player.shouldGoUp = true
+		} else if (p5.keyCode === p5.DOWN_ARROW) {
+			player.shouldGoDown = true
+		}
+	}
+
+	p5.keyReleased = () => {
+		if (p5.keyCode === p5.UP_ARROW) {
+			player.shouldGoUp = false
+		} else if (p5.keyCode === p5.DOWN_ARROW) {
+			player.shouldGoDown = false
+		}
+	}
+
+	function clearScreen () {
 		p5.clear()
 		p5.background(0)
+	}
 
+	function displayObjects () {
 		displayPaddle(player)
 		displayPaddle(cpu)
-
-		player.update()
-		cpu.update()
-
-		cpu.processArtificialMovement(ball.y)
-
-		ball.update(player, cpu)
 		displayBall(ball)
+	}
 
-		handleCollision(player, cpu, ball)		
-
+	function displayLine () {
 		p5.stroke(255)
 		p5.line(p5.width / 2, 0, p5.width / 2, p5.height)
+	}
+
+	function displayScores () {
 		p5.textSize(32)
 		p5.fill(255)
 		p5.text(player.getScore(), p5.width / 2 - 28, 30)
 		p5.text(cpu.getScore(), p5.width / 2 + 10, 30)
 	}
 
-	p5.keyPressed = () => {
-		if (p5.keyCode === p5.UP_ARROW) {
-			player.isUp = true
-		} else if (p5.keyCode === p5.DOWN_ARROW) {
-			player.isDown = true
-		}
+	function updateObjects () {
+		player.update()
+		cpu.update()
+		ball.update(player, cpu)
+		cpu.processArtificialMovement(ball.y)
 	}
 
-	p5.keyReleased = () => {
-		if (p5.keyCode === p5.UP_ARROW) {
-			player.isUp = false
-		} else if (p5.keyCode === p5.DOWN_ARROW) {
-			player.isDown = false
-		}
-	}
-
-	function handleCollision (player: Paddle, cpu: Paddle, ball: Ball) {
+	function handleCollision () {
 		if (player.wasHitBy(ball) || cpu.wasHitBy(ball)) {
 			ball.changeDirection()
 		}
