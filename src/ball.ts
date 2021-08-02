@@ -1,4 +1,3 @@
-import { CPU } from './cpu'
 import { Paddle } from './paddle'
 
 export class Ball {
@@ -16,7 +15,7 @@ export class Ball {
     this.reset()
   }
 
-  update (player: Paddle, computer: CPU) {
+  update (player: Paddle, cpu: Paddle) {
     if (this.y < this.radius || this.y > this.canvasHeight - this.radius) {
 			this.ySpeed = -this.ySpeed
 		} 
@@ -25,7 +24,7 @@ export class Ball {
       player.score()
 			this.reset()
 		} else if (this.computerScored()) {
-      computer.score()
+      cpu.score()
       this.reset()
     }
 		

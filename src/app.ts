@@ -3,20 +3,18 @@ import 'p5/lib/addons/p5.dom'
 import './styles.scss'
 import { Paddle } from './paddle'
 import { Ball } from './ball'
-import { CPU } from './cpu'
-import { Player } from './player'
 
 const sketch = (p5: P5) => {
-	let player: Player
-	let cpu: CPU
+	let player: Paddle
+	let cpu: Paddle
 	let ball: Ball
 
 	p5.setup = () => {
 		const canvas = p5.createCanvas(624, 351)
 		canvas.parent('app')
 		p5.background(0)
-		player = new Player(26, p5.height / 2, p5.height)
-		cpu = new CPU(p5.width - 48, p5.height / 2, p5.height)
+		player = new Paddle(26, p5.height / 2, p5.height, p5.width)
+		cpu = new Paddle(p5.width - 48, p5.height / 2, p5.height, p5.width)
 		ball = new Ball(p5.width, p5.height)
 	}
 
@@ -30,7 +28,7 @@ const sketch = (p5: P5) => {
 		player.update()
 		cpu.update()
 
-		cpu.processMovement(ball.y)
+		cpu.processArtificialMovement(ball.y)
 
 		ball.update(player, cpu)
 		displayBall(ball)
@@ -61,10 +59,8 @@ const sketch = (p5: P5) => {
 		}
 	}
 
-	function handleCollision (player: Paddle, computer: Paddle, ball: Ball) {
-		if (player.wasReachedBy(ball)) {
-			ball.changeDirection()
-		} else if (computer.wasReachedBy(ball)) {
+	function handleCollision (player: Paddle, cpu: Paddle, ball: Ball) {
+		if (player.wasHitBy(ball) || cpu.wasHitBy(ball)) {
 			ball.changeDirection()
 		}
 	}
