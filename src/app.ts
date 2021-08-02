@@ -21,10 +21,10 @@ const sketch = (p5: P5) => {
 	p5.draw = () => {
 		clearScreen()
 		displayObjects()
-		updateObjects()
-		handleCollision()		
 		displayLine()
 		displayScores()
+		updateObjects()
+		handleCollision()		
 	}
 
 	p5.keyPressed = () => {
