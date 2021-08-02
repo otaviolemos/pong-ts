@@ -57,11 +57,11 @@ export class Paddle {
   }
 
   leftReachedBy (ball: Ball) {
-    return ball.x - ball.radius <= this.x + this.width && ball.x > this.x
+    return ball.x - ball.radius <= this.x + this.width && ball.x >= this.x
   }
 
   rightReachedBy (ball: Ball) {
-    return ball.x + ball.radius >= this.x && ball.x <= this.x + this.width
+    return ball.x + ball.radius >= this.x - this.width && ball.x <= this.x 
   }
 
   isAtLeftSide() {
