@@ -48,7 +48,7 @@ export class Ball {
 		
 		this.xSpeed = this.randomBetween(3, 4)
 		
-		let isLeft = this.randomBetween(0, 1)
+		let isLeft = this.randomBetween(0, 1) > 0.5
 		
     if (isLeft) {
 			this.xSpeed = -this.xSpeed;
