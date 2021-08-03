@@ -15,16 +15,16 @@ export class Ball {
     this.reset()
   }
 
-  update (player: Paddle, cpu: Paddle) {
+  update (leftPaddle: Paddle, rightPaddle: Paddle) {
     if (this.y < this.radius || this.y > this.canvasHeight - this.radius) {
 			this.ySpeed = -this.ySpeed
 		} 
     
-		if (this.playerScored()) {
-      player.score()
+		if (this.leftPaddleScored()) {
+      leftPaddle.score()
 			this.reset()
-		} else if (this.cpuScored()) {
-      cpu.score()
+		} else if (this.rightPaddleScored()) {
+      rightPaddle.score()
       this.reset()
     }
 		
@@ -32,11 +32,11 @@ export class Ball {
 		this.y += this.ySpeed
   }
 
-  playerScored (): boolean {
+  leftPaddleScored (): boolean {
     return this.x > this.canvasWidth + this.radius
   }
 
-  cpuScored (): boolean {
+  rightPaddleScored (): boolean {
     return this.x < this.radius
   }
 
