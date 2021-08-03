@@ -21,8 +21,10 @@ export class Paddle {
 
   update () {
     if (this.shouldGoUp && this.canGoUp()) {
-      this.goUp()
-    } else if (this.shouldGoDown && this.canGoDown()) {
+      return this.goUp()
+    }
+    
+    if (this.shouldGoDown && this.canGoDown()) {
       this.goDown()
     }
   }
