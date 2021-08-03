@@ -16,20 +16,36 @@ export class Ball {
   }
 
   update (leftPaddle: Paddle, rightPaddle: Paddle) {
-    if (this.y < this.radius || this.y > this.canvasHeight - this.radius) {
-			this.ySpeed = -this.ySpeed
+    if (this.reachedTop() || this.reachedBottom()) {
+			this.bounce()
 		} 
     
 		if (this.leftPaddleScored()) {
       leftPaddle.score()
 			this.reset()
-		} else if (this.rightPaddleScored()) {
+      return 
+		} 
+    
+    if (this.rightPaddleScored()) {
       rightPaddle.score()
       this.reset()
+      return 
     }
 		
 		this.x += this.xSpeed
 		this.y += this.ySpeed
+  }
+
+  private bounce() {
+    this.ySpeed = -this.ySpeed
+  }
+
+  private reachedTop (): boolean {
+    return this.y < this.radius
+  }
+
+  private reachedBottom (): boolean {
+    return this.y > this.canvasHeight - this.radius
   }
 
   private leftPaddleScored (): boolean {
