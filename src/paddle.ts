@@ -20,23 +20,27 @@ export class Paddle {
   }
 
   update () {
-    if (this.shouldGoUp) {
+    if (this.shouldGoUp && this.canGoUp()) {
       this.goUp()
-    } else if (this.shouldGoDown) {
+    } else if (this.shouldGoDown && this.canGoDown()) {
       this.goDown()
     }
   }
 
+  canGoUp (): boolean {
+    return this.y > 0
+  }
+
+  canGoDown (): boolean {
+    return this.y < this.canvasHeight - this.height
+  }
+
   goUp () {
-    if (this.y > 0) {
-      this.y -= 2
-    }
+    this.y -= 2
   }
 
   goDown () {
-    if (this.y < this.canvasHeight - this.height) {
-      this.y += 2
-    }
+    this.y += 2
   }
 
   score () {
