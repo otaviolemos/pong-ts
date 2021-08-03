@@ -23,7 +23,7 @@ export class Ball {
 		if (this.playerScored()) {
       player.score()
 			this.reset()
-		} else if (this.computerScored()) {
+		} else if (this.cpuScored()) {
       cpu.score()
       this.reset()
     }
@@ -36,7 +36,7 @@ export class Ball {
     return this.x > this.canvasWidth + this.radius
   }
 
-  computerScored (): boolean {
+  cpuScored (): boolean {
     return this.x < this.radius
   }
 
