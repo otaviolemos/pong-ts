@@ -49,7 +49,7 @@ export class Paddle {
 
   wasHitBy (ball: Ball): boolean {
     if (this.isAtTheSameHeightOf(ball)) {
-      if (this.isAtLeftSide) {
+      if (this.isAtLeftSide()) {
         return this.leftReachedBy(ball) 
       }
       return this.rightReachedBy(ball)
