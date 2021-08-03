@@ -32,11 +32,11 @@ export class Ball {
 		this.y += this.ySpeed
   }
 
-  leftPaddleScored (): boolean {
+  private leftPaddleScored (): boolean {
     return this.x > this.canvasWidth + this.radius
   }
 
-  rightPaddleScored (): boolean {
+  private rightPaddleScored (): boolean {
     return this.x < this.radius
   }
 
@@ -53,7 +53,7 @@ export class Ball {
 		this.ySpeed = this.randomBetween(-3, 3)
   }
 
-  randomBetween (min: number, max: number) {
+  private randomBetween (min: number, max: number) {
     return Math.random() * (max - min) + min;
   }
 

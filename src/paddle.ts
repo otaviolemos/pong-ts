@@ -27,19 +27,19 @@ export class Paddle {
     }
   }
 
-  canGoUp (): boolean {
+  private canGoUp (): boolean {
     return this.y > 0
   }
 
-  canGoDown (): boolean {
+  private canGoDown (): boolean {
     return this.y < this.canvasHeight - this.height
   }
 
-  goUp () {
+  private goUp () {
     this.y -= 2
   }
 
-  goDown () {
+  private goDown () {
     this.y += 2
   }
 
@@ -60,19 +60,19 @@ export class Paddle {
     }
   }
 
-  leftReachedBy (ball: Ball) {
+  private leftReachedBy (ball: Ball) {
     return ball.x - ball.radius <= this.x + this.width && ball.x > this.x
   }
 
-  rightReachedBy (ball: Ball) {
+  private rightReachedBy (ball: Ball) {
     return ball.x + ball.radius >= this.x && ball.x <= this.x + this.width
   }
 
-  isAtLeftSide() {
+  private isAtLeftSide() {
     return this.x < (this.canvasWidth / 2)
   }
 
-  isAtTheSameHeightOf (ball: Ball): boolean {
+  private isAtTheSameHeightOf (ball: Ball): boolean {
     return ball.y >= this.y && ball.y <= this.y + this.height
   }
 
