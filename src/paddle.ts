@@ -11,6 +11,7 @@ export class Paddle {
   readonly canvasWidth: number
   shouldGoDown = false
   shouldGoUp = false
+  static readonly TOP = 0
   
   constructor (x: number, y: number, canvasHeight: number, canvasWidth: number) {
     this.x = x
@@ -25,12 +26,12 @@ export class Paddle {
     }
     
     if (this.shouldGoDown && this.canGoDown()) {
-      this.goDown()
+      return this.goDown()
     }
   }
 
   private canGoUp (): boolean {
-    return this.y > 0
+    return this.y > Paddle.TOP
   }
 
   private canGoDown (): boolean {
