@@ -30,7 +30,11 @@ export class Ball {
       return this.reset() 
     }
 		
-		this.x += this.xSpeed
+		this.move()
+  }
+
+  private move() {
+    this.x += this.xSpeed
 		this.y += this.ySpeed
   }
 
@@ -55,8 +59,10 @@ export class Ball {
   }
 
   reset () {
-    this.x = this.canvasWidth / 2
-		this.y = this.canvasHeight / 2
+    const midWidth = this.canvasWidth / 2
+    const midHeight = this.canvasHeight / 2
+    this.x = midWidth
+		this.y = midHeight
 		this.xSpeed = this.randomBetween(3, 4)
 		
 		let shouldGoLeft = this.randomBetween(0, 1) > 0.5
