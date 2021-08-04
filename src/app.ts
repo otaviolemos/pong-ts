@@ -13,8 +13,9 @@ const sketch = (p5: P5) => {
 		const canvas = p5.createCanvas(624, 351)
 		canvas.parent('app')
 		p5.background(0)
-		player = new Paddle(26, p5.height / 2, p5.height, p5.width)
-		cpu = new Paddle(p5.width - 48, p5.height / 2, p5.height, p5.width)
+		const middleOfCanvas = p5.height / 2
+		player = new Paddle(26, middleOfCanvas, p5.height, p5.width)
+		cpu = new Paddle(p5.width - 48, middleOfCanvas, p5.height, p5.width)
 		ball = new Ball(p5.width, p5.height)
 	}
 
@@ -29,17 +30,23 @@ const sketch = (p5: P5) => {
 
 	p5.keyPressed = () => {
 		if (p5.keyCode === p5.UP_ARROW) {
-			player.shouldGoUp = true
-		} else if (p5.keyCode === p5.DOWN_ARROW) {
-			player.shouldGoDown = true
+			return player.shouldGoUp = true
+		} 
+		
+		if (p5.keyCode === p5.DOWN_ARROW) {
+			return player.shouldGoDown = true
 		}
 	}
 
 	p5.keyReleased = () => {
 		if (p5.keyCode === p5.UP_ARROW) {
 			player.shouldGoUp = false
-		} else if (p5.keyCode === p5.DOWN_ARROW) {
+			return
+		}  
+		
+		if (p5.keyCode === p5.DOWN_ARROW) {
 			player.shouldGoDown = false
+			return
 		}
 	}
 
