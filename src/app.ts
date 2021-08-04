@@ -40,13 +40,11 @@ const sketch = (p5: P5) => {
 
 	p5.keyReleased = () => {
 		if (p5.keyCode === p5.UP_ARROW) {
-			player.shouldGoUp = false
-			return
+			return player.shouldGoUp = false
 		}  
 		
 		if (p5.keyCode === p5.DOWN_ARROW) {
-			player.shouldGoDown = false
-			return
+			return player.shouldGoDown = false
 		}
 	}
 
