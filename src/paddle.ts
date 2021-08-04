@@ -84,9 +84,9 @@ export class Paddle {
     if (middleOfPaddle > ballHeight) {
       this.shouldGoUp = true;
       this.shouldGoDown = false;
-    } else {
-      this.shouldGoDown = true;
-      this.shouldGoUp = false;
-    }
+      return
+    } 
+    this.shouldGoDown = true;
+    this.shouldGoUp = false;
   }
 }
