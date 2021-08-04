@@ -22,14 +22,12 @@ export class Ball {
     
 		if (this.leftPaddleScored()) {
       leftPaddle.score()
-			this.reset()
-      return 
+			return this.reset() 
 		} 
     
     if (this.rightPaddleScored()) {
       rightPaddle.score()
-      this.reset()
-      return 
+      return this.reset() 
     }
 		
 		this.x += this.xSpeed
