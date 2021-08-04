@@ -75,7 +75,7 @@ const sketch = (p5: P5) => {
 
 	function handleCollision () {
 		if (player.wasHitBy(ball) || cpu.wasHitBy(ball)) {
-			ball.changeDirection()
+			ball.bounceOnX()
 		}
 	}
 
