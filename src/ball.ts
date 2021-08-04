@@ -67,7 +67,7 @@ export class Ball {
 		
 		let shouldGoLeft = this.randomBetween(0, 1) > 0.5
     if (shouldGoLeft) {
-			this.xSpeed = -this.xSpeed;
+			this.bounceOnX()
 		} 
 		
 		this.ySpeed = this.randomBetween(-3, 3)
