@@ -17,7 +17,7 @@ export class Ball {
 
   update (leftPaddle: Paddle, rightPaddle: Paddle) {
     if (this.reachedTop() || this.reachedBottom()) {
-			this.bounce()
+			this.bounceOnY()
 		} 
     
 		if (this.leftPaddleScored()) {
@@ -34,7 +34,7 @@ export class Ball {
 		this.y += this.ySpeed
   }
 
-  private bounce() {
+  private bounceOnY() {
     this.ySpeed = -this.ySpeed
   }
 
@@ -71,7 +71,7 @@ export class Ball {
     return Math.random() * (max - min) + min;
   }
 
-  changeDirection () {
+  bounceOnX () {
     this.xSpeed = -this.xSpeed
   }
 }
