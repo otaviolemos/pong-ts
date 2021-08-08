@@ -1,9 +1,11 @@
-import P5, { Image } from 'p5'
+import P5, { Image, SoundFile } from 'p5'
 import 'p5/lib/addons/p5.dom'
+import 'p5/lib/addons/p5.sound'
 import './styles.scss'
 import { Paddle } from './paddle'
 import { Ball } from './ball'
 import { Mushroom } from './mushroom'
+import { load } from '../dist/app.5cec07dd'
 
 const sketch = (p5: P5) => {
 	let player: Paddle
@@ -11,9 +13,15 @@ const sketch = (p5: P5) => {
 	let ball: Ball
 	let mushroomImage: Image
 	let mushroom: Mushroom
+	let hitSound: SoundFile
+	let powerUpSound: SoundFile
 
 	p5.preload = () => {
+		const loadSound = (path: string) =>
+			((p5 as any) as SoundFile).loadSound(path)
 		mushroomImage = p5.loadImage('mushroom.png')
+		hitSound = loadSound('hit.wav')
+		powerUpSound = loadSound('power-up.mp3')
 	}
 
 	p5.setup = () => {
@@ -93,12 +101,19 @@ const sketch = (p5: P5) => {
 	function handleCollision () {
 		if (player.wasHitBy(ball) || cpu.wasHitBy(ball)) {
 			ball.bounceOnX()
+			hitSound.play()
+		}
+
+		if (mushroom.isActive() && player.wasTouchedBy(mushroom)) {
+			powerUpSound.play()
+			mushroom.reset()
+			player.growBy(30)
 		}
 	}
 
 	function displayPaddle (paddle: Paddle) {
 		p5.stroke(255)
-    p5.rect(paddle.x, paddle.y, 20, 80)
+    p5.rect(paddle.x, paddle.y, paddle.width, paddle.height)
   }
 
   function displayBall (ball: Ball) {

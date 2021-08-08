@@ -1,6 +1,7 @@
+import { GameObject } from './game-object'
 import { randomBetween } from './util'
 
-export class Mushroom {
+export class Mushroom implements GameObject {
   active: boolean = false
   probabilityOfAppearence = 0.003
   x: number

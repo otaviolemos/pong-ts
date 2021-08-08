@@ -1,7 +1,8 @@
+import { GameObject } from './game-object'
 import { Paddle } from './paddle'
 import { randomBetween } from './util'
 
-export class Ball {
+export class Ball implements GameObject {
   readonly radius = 10
   x: number
   y: number

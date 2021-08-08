@@ -1,11 +1,13 @@
 import { Ball } from './ball'
+import { GameObject } from './game-object'
+import { Mushroom } from './mushroom'
 
-export class Paddle {
+export class Paddle implements Object {
 
   private _score: number = 0
   y: number
   readonly x: number  
-  readonly height: number = 80
+  height: number = 80
   readonly width: number = 20
   readonly canvasHeight: number
   readonly canvasWidth: number
@@ -63,6 +65,14 @@ export class Paddle {
     }
   }
 
+  wasTouchedBy (mushroom: Mushroom): boolean {
+    return this.isAtTheSameHeightOf(mushroom) && this.wasReachedBy(mushroom)
+  }
+
+  private wasReachedBy (mushroom: Mushroom): boolean {
+    return mushroom.x < this.x + this.width
+  }
+
   private leftReachedBy (ball: Ball) {
     return ball.x - ball.radius <= this.x + this.width && ball.x > this.x
   }
@@ -75,8 +85,8 @@ export class Paddle {
     return this.x < (this.canvasWidth / 2)
   }
 
-  private isAtTheSameHeightOf (ball: Ball): boolean {
-    return ball.y >= this.y && ball.y <= this.y + this.height
+  private isAtTheSameHeightOf (object: GameObject): boolean {
+    return object.y >= this.y && object.y <= this.y + this.height
   }
 
   processArtificialMovement (ballHeight: number) {
@@ -88,5 +98,9 @@ export class Paddle {
     } 
     this.shouldGoDown = true;
     this.shouldGoUp = false;
+  }
+
+  growBy (n: number) {
+    this.height += n
   }
 }
