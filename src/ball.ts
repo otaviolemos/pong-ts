@@ -1,4 +1,5 @@
 import { Paddle } from './paddle'
+import { randomBetween } from './util'
 
 export class Ball {
   readonly radius = 10
@@ -63,18 +64,14 @@ export class Ball {
     const midHeight = this.canvasHeight / 2
     this.x = midWidth
 		this.y = midHeight
-		this.xSpeed = this.randomBetween(3, 4)
+		this.xSpeed = randomBetween(3, 4)
 		
-		let shouldGoLeft = this.randomBetween(0, 1) > 0.5
+		let shouldGoLeft = randomBetween(0, 1) > 0.5
     if (shouldGoLeft) {
 			this.bounceOnX()
 		} 
 		
-		this.ySpeed = this.randomBetween(-3, 3)
-  }
-
-  private randomBetween (min: number, max: number) {
-    return Math.random() * (max - min) + min;
+		this.ySpeed = randomBetween(-3, 3)
   }
 
   bounceOnX () {

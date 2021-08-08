@@ -1,13 +1,20 @@
-import P5 from 'p5'
+import P5, { Image } from 'p5'
 import 'p5/lib/addons/p5.dom'
 import './styles.scss'
 import { Paddle } from './paddle'
 import { Ball } from './ball'
+import { Mushroom } from './mushroom'
 
 const sketch = (p5: P5) => {
 	let player: Paddle
 	let cpu: Paddle
 	let ball: Ball
+	let mushroomImage: Image
+	let mushroom: Mushroom
+
+	p5.preload = () => {
+		mushroomImage = p5.loadImage('mushroom.png')
+	}
 
 	p5.setup = () => {
 		const canvas = p5.createCanvas(624, 351)
@@ -17,6 +24,7 @@ const sketch = (p5: P5) => {
 		player = new Paddle(26, middleOfCanvas, p5.height, p5.width)
 		cpu = new Paddle(p5.width - 48, middleOfCanvas, p5.height, p5.width)
 		ball = new Ball(p5.width, p5.height)
+		mushroom = new Mushroom(p5.width, p5.height)
 	}
 
 	p5.draw = () => {
@@ -25,7 +33,7 @@ const sketch = (p5: P5) => {
 		displayLine()
 		displayScores()
 		updateObjects()
-		handleCollision()		
+		handleCollision()
 	}
 
 	p5.keyPressed = () => {
@@ -57,6 +65,9 @@ const sketch = (p5: P5) => {
 		displayPaddle(player)
 		displayPaddle(cpu)
 		displayBall(ball)
+		if (mushroom.isActive()) {
+			displayMushroom(mushroom)
+		}
 	}
 
 	function displayLine () {
@@ -75,6 +86,7 @@ const sketch = (p5: P5) => {
 		player.update()
 		cpu.update()
 		ball.update(player, cpu)
+		mushroom.update()
 		cpu.processArtificialMovement(ball.y)
 	}
 
@@ -92,6 +104,11 @@ const sketch = (p5: P5) => {
   function displayBall (ball: Ball) {
 		p5.stroke(255)
     p5.ellipse(ball.x, ball.y, ball.radius * 2, ball.radius * 2)
+  }
+
+	function displayMushroom (mushroom: Mushroom) {
+		p5.stroke(255)
+		p5.image(mushroomImage, mushroom.x, mushroom.y, mushroom.size, mushroom.size)
   }
 };
 
