@@ -19,10 +19,10 @@ const sketch = (p5: P5) => {
 	p5.preload = () => {
 		const loadSound = (path: string) =>
 			((p5 as any) as SoundFile).loadSound(path)
-		mushroomImage = p5.loadImage('mushroom.png')
-		hitSound = loadSound('hit.wav')
-		powerUpSound = loadSound('power-up.mp3')
-		backgroundMusic = loadSound('background-music.mp3')
+		mushroomImage = p5.loadImage('assets/mushroom.png')
+		hitSound = loadSound('assets/hit.wav')
+		powerUpSound = loadSound('assets/power-up.mp3')
+		backgroundMusic = loadSound('assets/background-music.mp3')
 	}
 
 	p5.setup = () => {
