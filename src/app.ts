@@ -5,7 +5,6 @@ import './styles.scss'
 import { Paddle } from './paddle'
 import { Ball } from './ball'
 import { Mushroom } from './mushroom'
-import { load } from '../dist/app.5cec07dd'
 
 const sketch = (p5: P5) => {
 	let player: Paddle
@@ -15,6 +14,7 @@ const sketch = (p5: P5) => {
 	let mushroom: Mushroom
 	let hitSound: SoundFile
 	let powerUpSound: SoundFile
+	let backgroundMusic: SoundFile
 
 	p5.preload = () => {
 		const loadSound = (path: string) =>
@@ -22,6 +22,7 @@ const sketch = (p5: P5) => {
 		mushroomImage = p5.loadImage('mushroom.png')
 		hitSound = loadSound('hit.wav')
 		powerUpSound = loadSound('power-up.mp3')
+		backgroundMusic = loadSound('background-music.mp3')
 	}
 
 	p5.setup = () => {
@@ -33,6 +34,8 @@ const sketch = (p5: P5) => {
 		cpu = new Paddle(p5.width - 48, middleOfCanvas, p5.height, p5.width)
 		ball = new Ball(p5.width, p5.height)
 		mushroom = new Mushroom(p5.width, p5.height)
+		backgroundMusic.setVolume(0.1)
+		backgroundMusic.loop()
 	}
 
 	p5.draw = () => {
