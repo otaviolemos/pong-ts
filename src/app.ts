@@ -15,6 +15,7 @@ const sketch = (p5: P5) => {
 	let hitSound: SoundFile
 	let powerUpSound: SoundFile
 	let backgroundMusic: SoundFile
+	let growCount = 0
 
 	p5.preload = () => {
 		const loadSound = (path: string) =>
@@ -44,6 +45,9 @@ const sketch = (p5: P5) => {
 		displayLine()
 		displayScores()
 		updateObjects()
+		if (p5.frameCount % 10 === 0) {
+			processGrowth()
+		}
 		handleCollision()
 	}
 
@@ -101,6 +105,20 @@ const sketch = (p5: P5) => {
 		cpu.processArtificialMovement(ball.y)
 	}
 
+	function processGrowth () {
+		if (player.shouldGrow && growCount < 3) {
+			player.goUp()
+			player.growBy(4)
+			growCount++
+			return
+		}
+
+		if (growCount === 3) {
+			growCount = 0
+			player.shouldGrow = false
+		}
+	}
+
 	function handleCollision () {
 		if (player.wasHitBy(ball) || cpu.wasHitBy(ball)) {
 			ball.bounceOnX()
@@ -110,7 +128,7 @@ const sketch = (p5: P5) => {
 		if (mushroom.isActive() && player.wasTouchedBy(mushroom)) {
 			powerUpSound.play()
 			mushroom.reset()
-			player.growBy(30)
+			player.setShouldGrow()
 		}
 	}
 

@@ -13,6 +13,7 @@ export class Paddle implements Object {
   readonly canvasWidth: number
   shouldGoDown = false
   shouldGoUp = false
+  shouldGrow = false
   static readonly CANVAS_TOP = 0
   
   constructor (x: number, y: number, canvasHeight: number, canvasWidth: number) {
@@ -40,12 +41,16 @@ export class Paddle implements Object {
     return this.y < this.canvasHeight - this.height
   }
 
-  private goUp () {
+  goUp () {
     this.y -= 2
   }
 
-  private goDown () {
+  goDown () {
     this.y += 2
+  }
+
+  setShouldGrow() {
+    this.shouldGrow = true
   }
 
   score () {
