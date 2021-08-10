@@ -35,6 +35,7 @@ const sketch = (p5: P5) => {
 		cpu = new Paddle(p5.width - 48, middleOfCanvas, p5.height, p5.width)
 		ball = new Ball(p5.width, p5.height)
 		mushroom = new Mushroom(p5.width, p5.height)
+		powerUpSound.setVolume(1.1)
 		backgroundMusic.setVolume(0.1)
 		backgroundMusic.loop()
 	}
@@ -45,7 +46,7 @@ const sketch = (p5: P5) => {
 		displayLine()
 		displayScores()
 		updateObjects()
-		if (p5.frameCount % 10 === 0) {
+		if (p5.frameCount % 20 === 0) {
 			processGrowth()
 		}
 		handleCollision()
