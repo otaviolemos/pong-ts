@@ -46,10 +46,14 @@ const sketch = (p5: P5) => {
 		displayLine()
 		displayScores()
 		updateObjects()
-		if (p5.frameCount % 20 === 0) {
+		if (slowerRefresh()) {
 			processGrowth()
 		}
 		handleCollision()
+	}
+
+	function slowerRefresh (): boolean {
+		return p5.frameCount % 20 === 0
 	}
 
 	p5.keyPressed = () => {
@@ -116,7 +120,7 @@ const sketch = (p5: P5) => {
 
 		if (growCount === 3) {
 			growCount = 0
-			player.shouldGrow = false
+			player.stopGrowing()
 		}
 	}
 
@@ -129,7 +133,7 @@ const sketch = (p5: P5) => {
 		if (mushroom.isActive() && player.wasTouchedBy(mushroom)) {
 			powerUpSound.play()
 			mushroom.reset()
-			player.setShouldGrow()
+			player.startGrowing()
 		}
 	}
 

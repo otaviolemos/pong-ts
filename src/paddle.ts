@@ -49,8 +49,12 @@ export class Paddle implements Object {
     this.y += 2
   }
 
-  setShouldGrow() {
+  startGrowing() {
     this.shouldGrow = true
+  }
+
+  stopGrowing() {
+    this.shouldGrow = false
   }
 
   score () {
